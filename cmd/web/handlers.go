@@ -8,6 +8,7 @@ import (
 	"strconv"
 )
 
+// Обработчик главной странице.
 func home(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
@@ -41,12 +42,13 @@ func showSnippet(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(w, "Show the note with id - %d", id)
+	fmt.Fprintf(w, "Show chosen note with id - %d", id)
 }
 
 func createSnippet(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.Header().Set("Allow", http.MethodPost)
+
 		http.Error(w, "Method forbidden", 405)
 		return
 	}
